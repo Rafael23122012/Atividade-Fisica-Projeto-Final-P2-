@@ -44,9 +44,16 @@ fun createGpxDocument(movimentosData: MutableList<Movimento>): String {
         val trkpt: Element = doc.createElement("trkpt")
         trkpt.setAttribute("lat", "${movimento.latitude}")
         trkpt.setAttribute("lon", "${movimento.longitude}")
+
         val trkptDateTime: Element = doc.createElement(("trkptDateTime"))
         trkptDateTime.appendChild(doc.createTextNode("${movimento.timestamp}"))
         trkpt.appendChild(trkptDateTime)
+
+        val trkptAccelerometro: Element = doc.createElement(("trkptAxisX"))
+        trkptAccelerometro.setAttribute("AxisX", "${movimento.accelX}")
+        trkptAccelerometro.setAttribute("AxisY", "${movimento.accelY}")
+        trkptAccelerometro.setAttribute("AxisZ", "${movimento.accelZ}")
+        trkpt.appendChild(trkptAccelerometro)
         trkseg.appendChild(trkpt)
     }
 
